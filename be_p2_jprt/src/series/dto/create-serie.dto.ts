@@ -30,4 +30,10 @@ export class CreateSerieDto {
   @IsNotEmpty({ message: 'El campo fechaEstreno debe estar definido' })
   @IsDateString({}, { message: 'El campo fechaEstreno debe ser de tipo fecha' })
   readonly fechaEstreno: Date;
+
+  @ApiProperty()
+  @IsNotEmpty({ message: 'El campo tipo genero es obligatorio' })
+  @IsString({ message: 'El campo tipo genero debe ser tipo cadena' })
+  @MaxLength(50, { message: 'El campo tipo genero excede los 50 caractares' })
+  readonly tipoGenero: string;
 }

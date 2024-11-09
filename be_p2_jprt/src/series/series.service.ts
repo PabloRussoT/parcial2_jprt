@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateSerieDto } from './dto/create-serie.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -7,7 +11,9 @@ import { UpdateSerieDto } from './dto/update-serie.dto';
 
 @Injectable()
 export class SeriesService {
-  constructor(@InjectRepository(Serie) private seriesRepository: Repository<Serie>) {}
+  constructor(
+    @InjectRepository(Serie) private seriesRepository: Repository<Serie>,
+  ) {}
 
   async create(createSerieDto: CreateSerieDto): Promise<Serie> {
     const existe = await this.seriesRepository.findOneBy({
@@ -25,6 +31,7 @@ export class SeriesService {
       director: createSerieDto.director.trim(),
       temporadas: createSerieDto.temporadas,
       fechaEstreno: createSerieDto.fechaEstreno,
+      tipoGenero: createSerieDto.tipoGenero.trim(),
     });
   }
 
@@ -51,4 +58,3 @@ export class SeriesService {
     return this.seriesRepository.delete(serie.id);
   }
 }
-
